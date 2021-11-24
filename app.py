@@ -1,6 +1,31 @@
 from typing import Optional
-
+from fastapi import FastAPI, Form
+import json
+from fastapi.responses import Response
+from fastapi.staticfiles import StaticFiles
+from jinja2 import Environment, FileSystemLoader
 from sqlmodel import Field, Session, SQLModel, create_engine, select
+
+app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/")
+def index():
+    file_loader = FileSystemLoader('templates')
+    env = Environment(loader=file_loader)
+    tm = env.get_template('index.html')
+    msg = tm.render()
+    return Response(msg, media_type="text/html")
+
+@app.post("/")
+def get_new_word(new_word : str = Form(...)):
+    response = Response(
+        json.dumps({
+            "success": True,
+            "message": f"There are 100 words in dictionary" 
+        }),
+        media_type='application/json')
+    return response
 
 class Vocabulary(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -34,7 +59,7 @@ def select_words():
     """Забираем данные из базы"""
     with Session(engine) as session:
         words = session.exec(select(Vocabulary)).all()
-        print(words)
+        return words
 
 
 def main():
