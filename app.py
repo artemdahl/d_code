@@ -14,7 +14,8 @@ def index():
     file_loader = FileSystemLoader('templates')
     env = Environment(loader=file_loader)
     tm = env.get_template('index.html')
-    msg = tm.render()
+    random_word = select_words()
+    msg = tm.render(random_word = random_word)
     return Response(msg, media_type="text/html")
 
 class Vocabulary(SQLModel, table=True):
@@ -48,17 +49,16 @@ def get_new_word(new_word : str = Form(...)):
 def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
 
-# def select_words():
-#     """Забираем данные из базы"""
-#     with Session(engine) as session:
-#         words = session.exec(select(Vocabulary.eng_word).where(Vocabulary.id == 8))
-#         print(words)
-#         for word in words:
-#             print(word)
+def select_words():
+    """Забираем данные из базы"""
+    with Session(engine) as session:
+        word = session.get(Vocabulary, 1)
+        y = word.eng_word
+        return y
 
 def main():
     create_db_and_tables()
-    # select_words()
+    select_words()
 
 if __name__ == "__main__":
     main()
