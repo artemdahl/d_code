@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>Словарь</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="static/styles2.css" rel="stylesheet">
+<script src="static/scripts.js"></script>
+</head>
+
+<body>
+<table class="table">
+    <tr class="table_header">
+        {% for header in headings %}
+        <th class="table_cell">{{ header }}</th>
+        {% endfor %}
+    </tr>
+    {% for row in all %}
+    <tr class="table_row">
+        {% for cell in row %}
+        <td class="table_cell">{{ cell }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+</body>

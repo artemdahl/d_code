@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", function(){
     let btn = document.querySelector('input[type=submit]');
     btn.addEventListener('click', async function(event){
         event.preventDefault();
-        let new_word = document.querySelector('input[name=new_word]').value;
-        if (new_word == '') {
+        let input_word = document.querySelector('input[name=input_word]').value;
+        if (input_word == '') {
             return
         }
         let response = await fetch("/", {

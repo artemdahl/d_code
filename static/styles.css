@@ -26,6 +26,16 @@ form {
     max-width: 350px;
 }
 
-.placeholder{
+.placeholder {
     flex: 1;
+}
+
+.trans_check {
+    font-size: 25px;
+    text-decoration: underline;
+    margin-bottom: 20px;
+}
+
+.random {
+    font-size: 30px;
 }

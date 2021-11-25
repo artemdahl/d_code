@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Словарь</title>
+<title>Проверка перевода</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="static/styles.css" rel="stylesheet">
@@ -9,18 +9,19 @@
 
 <body>
 <div class="placeholder"></div>
+<div class="trans_check">Проверка перевода</div>
 <div class="random">{{ random_word }}</div><p>
 <form method="POST" action="/" class="form_new_word">
-    <input type="text" name="new_word">
-    <input type="submit" value="Сохранить">
+    <input type="text" name="input_word" autofocus >
+    <input type="submit" value="Проверить">
 </form>
 
 <div class="message"></div>
-<p><p>
+<!-- <p><p>
 <form method="POST" action="/" class="form_translation">
     <input type="text" name="trans_word">
     <input type="submit" value="Сохранить">
-</form>
+</form> -->
 
 
 <div class="placeholder"></div>
